@@ -4,7 +4,20 @@
     "description": "Task Manager component for Weweb",
     "author": "Your Name",
     "license": "MIT",
+    "type": "module",
+    "scripts": {
+      "build": "weweb build",
+      "serve": "weweb serve"
+    },
     "dependencies": {
       "lodash": "^4.17.21"
+    },
+    "devDependencies": {
+      "@weweb/cli": "latest"
+    },
+    "wwObject": {
+      "category": "task",
+      "name": "Task Manager",
+      "type": "task-manager"
     }
   }

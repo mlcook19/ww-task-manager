@@ -1,0 +1,25 @@
+{
+    "name": "Task Manager",
+    "version": "1.0.0",
+    "editor": {
+        "configBar": {
+            "label": "Task Manager Configuration",
+            "icon": "tasks"
+        }
+    },
+    "properties": {
+        "taskData": {
+            "label": "Task Data",
+            "type": "Object",
+            "bindable": true,
+            "defaultValue": {
+                "task": {
+                    "id": "",
+                    "title": "New Task",
+                    "subtasks": [],
+                    "comments": []
+                }
+            }
+        }
+    }
+} 
