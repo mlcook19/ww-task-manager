@@ -8,18 +8,21 @@
         }
     },
     "properties": {
-        "taskData": {
+        "content": {
             "label": "Task Data",
             "type": "Object",
+            "section": "settings",
             "bindable": true,
             "defaultValue": {
-                "task": {
-                    "id": "",
-                    "title": "New Task",
-                    "subtasks": [],
-                    "comments": []
+                "data": {
+                    "task": {
+                        "id": "task-001",
+                        "title": "Default Task",
+                        "subtasks": [],
+                        "comments": []
+                    }
                 }
             }
         }
     }
-} 
+}
