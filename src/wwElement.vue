@@ -1,3 +1,62 @@
+<template>
+    <div class="ww-task-manager">
+        <div class="task-content">
+            <!-- Task Title -->
+            <div class="task-header">
+                <h2 class="task-title">{{ content.data.task.title }}</h2>
+                <div class="task-actions">
+                    <button @click="updateTaskField('title', 'Updated Title')" class="action-button">
+                        Update Title
+                    </button>
+                </div>
+            </div>
+
+            <!-- Subtasks -->
+            <div class="subtasks-section">
+                <h3>Subtasks</h3>
+                <div v-for="subtask in content.data.task.subtasks" 
+                     :key="subtask.id" 
+                     class="subtask-item">
+                    <div class="subtask-header">
+                        <h4>{{ subtask.title }}</h4>
+                        <button @click="updateSubtask(subtask.id, { title: 'Updated ' + subtask.title })">
+                            Update
+                        </button>
+                    </div>
+                    <div class="checklist">
+                        <div v-for="(item, index) in subtask.checklist" 
+                             :key="index"
+                             class="checklist-item">
+                            <input type="checkbox" 
+                                   :checked="item.completed"
+                                   @change="updateChecklistItem(subtask.id, index, !item.completed)">
+                            <span>{{ item.item }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments -->
+            <div class="comments-section">
+                <h3>Comments</h3>
+                <div v-for="comment in content.data.task.comments" 
+                     :key="comment.id" 
+                     class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">{{ comment.user.name }}</span>
+                        <span class="comment-time">{{ formatDate(comment.timestamp) }}</span>
+                    </div>
+                    <p class="comment-content">{{ comment.content }}</p>
+                </div>
+                <button @click="addComment" class="add-comment">
+                    Add Comment
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
 export default {
     name: "Task Manager",
     props: {
@@ -115,4 +174,46 @@ export default {
             wwLib.wwData.unsubscribe('tasks', this.content.data.task.id);
         }
     }
-} 
+}
+</script>
+
+<style scoped>
+.ww-task-manager {
+    padding: 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.task-header {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subtask-item {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+}
+
+.comment {
+    margin: 0.75rem 0;
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border-radius: 0.375rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2563eb;
+}
+</style>
